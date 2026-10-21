@@ -1,0 +1,2402 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_agentnode": {
+        "api": {
+          "name": "shared_agentnode"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedagentnode_8854993f"
+        },
+        "runtimeSource": "invoker",
+        "connectionName": "shared-agentnode-caf6a4b4-44f5-40a4-8185-8f10d6a3979a"
+      },
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_c616b324"
+        },
+        "runtimeSource": "invoker",
+        "connectionName": "shared-sharepointonl-efac91d5-f076-495d-8d5b-3584ab82c8cf"
+      },
+      "shared_teams-1": {
+        "api": {
+          "name": "shared_teams"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedteams_932092c1"
+        },
+        "runtimeSource": "invoker",
+        "connectionName": "shared-teams-ee01dbbb-f104-4792-82ea-690404c1df56"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Report Title",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input"
+                },
+                "file": {
+                  "title": "Report File",
+                  "type": "object",
+                  "properties": {
+                    "contentBytes": {
+                      "type": "string",
+                      "format": "byte"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "x-ms-content-hint": "FILE",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please select a file or image"
+                },
+                "email": {
+                  "format": "email",
+                  "title": "Email",
+                  "type": "string",
+                  "x-ms-content-hint": "EMAIL",
+                  "x-ms-dynamically-added": true,
+                  "description": "Enter your email address"
+                }
+              },
+              "required": [
+                "text",
+                "file",
+                "email"
+              ]
+            }
+          },
+          "metadata": {
+            "associatedData": {
+              "graph": {
+                "name": "GM Report Review Workflow V2 - Demo",
+                "nodes": [
+                  {
+                    "id": "start-0224094d-e7be-4ae9-a1fd-3dcc1a6fd177",
+                    "name": "When an agent calls the flow",
+                    "type": "start",
+                    "version": 1,
+                    "position": {
+                      "x": 250,
+                      "y": 538
+                    },
+                    "data": {
+                      "config": {
+                        "triggerType": "connector",
+                        "connector": {
+                          "apiName": "Skills",
+                          "operationName": "When_an_agent_calls_the_flow",
+                          "displayName": "When an agent calls the flow",
+                          "kind": "Skills",
+                          "inputs": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "text": {
+                                  "title": "Report Title",
+                                  "type": "string",
+                                  "x-ms-content-hint": "TEXT",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Please enter your input"
+                                },
+                                "file": {
+                                  "title": "Report File",
+                                  "type": "object",
+                                  "properties": {
+                                    "contentBytes": {
+                                      "type": "string",
+                                      "format": "byte"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "x-ms-content-hint": "FILE",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Please select a file or image"
+                                },
+                                "email": {
+                                  "format": "email",
+                                  "title": "Email",
+                                  "type": "string",
+                                  "x-ms-content-hint": "EMAIL",
+                                  "x-ms-dynamically-added": true,
+                                  "description": "Enter your email address"
+                                }
+                              },
+                              "required": [
+                                "text",
+                                "file",
+                                "email"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "description": "Trigger output (schema determined by connector)"
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 261,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d",
+                    "name": "GM Report Reviewer V3",
+                    "type": "agent",
+                    "version": 1,
+                    "position": {
+                      "x": 971,
+                      "y": 538
+                    },
+                    "data": {
+                      "config": {
+                        "mode": "invoke",
+                        "instructions": "Review the attached Group Manager report against all requirements in Requirements0.2.xlsx.\n@{triggerOutputs()?['body/file']}\nProduce a complete Group Manager Report ",
+                        "botSchemaName": "cr9cf_gmgmn_XwJvvl",
+                        "isHitlEscalationEnabled": false,
+                        "webSearchEnabled": false,
+                        "inlineInstructions": "",
+                        "outputMode": "text",
+                        "inlineModel": "claude-opus-5",
+                        "connectionName": "shared_agentnode",
+                        "instructionsRich": {
+                          "segments": [
+                            {
+                              "type": "static",
+                              "value": "Review the attached Group Manager report against all requirements in Requirements0.2.xlsx.\n"
+                            },
+                            {
+                              "type": "token",
+                              "value": "Report File",
+                              "tokenRef": {
+                                "type": "step",
+                                "stepId": "start-0224094d-e7be-4ae9-a1fd-3dcc1a6fd177",
+                                "stepName": "When an agent calls the flow",
+                                "outputName": "file",
+                                "outputDisplayName": "Report File",
+                                "outputType": "object",
+                                "outputFormat": "byte",
+                                "contentHint": "FILE",
+                                "sourceNodeType": "start"
+                              }
+                            },
+                            {
+                              "type": "static",
+                              "value": "\nProduce a complete Group Manager Report "
+                            }
+                          ]
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "result": {
+                                "type": "string",
+                                "description": "The agent response text"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "The completion status (e.g., Completed)"
+                              },
+                              "conversationId": {
+                                "type": "string",
+                                "description": "Unique identifier for the conversation"
+                              }
+                            },
+                            "required": [
+                              "result",
+                              "conversationId"
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "agent-a8548592-56ef-4911-8619-259d58dd0cb8",
+                    "name": "GM Report Formatter",
+                    "type": "agent",
+                    "version": 1,
+                    "position": {
+                      "x": 1287,
+                      "y": 538
+                    },
+                    "data": {
+                      "config": {
+                        "mode": "invoke",
+                        "instructions": "Apply the GM Report Formatting Standard to the following report and return the fully formatted result.@{body('agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d')?['result']}\n\n",
+                        "botSchemaName": "cr9cf_gmreportformatter_05gZJr",
+                        "isHitlEscalationEnabled": false,
+                        "webSearchEnabled": false,
+                        "inlineInstructions": "",
+                        "outputMode": "text",
+                        "connectionName": "shared_agentnode",
+                        "inlineModel": "claude-opus-5-5",
+                        "instructionsRich": {
+                          "segments": [
+                            {
+                              "type": "static",
+                              "value": "Apply the GM Report Formatting Standard to the following report and return the fully formatted result."
+                            },
+                            {
+                              "type": "token",
+                              "value": "Result",
+                              "tokenRef": {
+                                "type": "step",
+                                "stepId": "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d",
+                                "stepName": "GM Report Reviewer V3",
+                                "outputName": "result",
+                                "outputDisplayName": "Result",
+                                "outputType": "string",
+                                "sourceNodeType": "agent"
+                              }
+                            },
+                            {
+                              "type": "static",
+                              "value": "\n\n"
+                            }
+                          ]
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "result": {
+                                "type": "string",
+                                "description": "The agent response text"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "The completion status (e.g., Completed)"
+                              },
+                              "conversationId": {
+                                "type": "string",
+                                "description": "Unique identifier for the conversation"
+                              }
+                            },
+                            "required": [
+                              "result",
+                              "conversationId"
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "connector-7681d44e-24b3-42bb-b056-79cdeebed765",
+                    "name": "Create file in SharePoint",
+                    "type": "connector",
+                    "version": 1,
+                    "position": {
+                      "x": 1605,
+                      "y": 539
+                    },
+                    "data": {
+                      "config": {
+                        "apiName": "shared_sharepointonline",
+                        "displayName": "SharePoint",
+                        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4913/sharepointonline/icon.png",
+                        "brandColor": "",
+                        "operationName": "CreateFile",
+                        "parametersSchema": {
+                          "type": "object",
+                          "properties": {
+                            "dataset": {
+                              "type": "string",
+                              "title": "Site Address",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetDataSets",
+                                "parameters": {},
+                                "itemsPath": "value",
+                                "itemValuePath": "Name",
+                                "itemTitlePath": "DisplayName"
+                              },
+                              "description": "Example: https://contoso.sharepoint.com/sites/sitename.",
+                              "minLength": 1,
+                              "x-ms-property-name-alias": "dataset"
+                            },
+                            "folderPath": {
+                              "type": "string",
+                              "title": "Folder Path",
+                              "x-ms-dynamic-tree": {
+                                "settings": {
+                                  "canSelectParentNodes": true,
+                                  "canSelectLeafNodes": false
+                                },
+                                "open": {
+                                  "operationId": "ListAllRootFolders",
+                                  "parameters": {
+                                    "dataset": {
+                                      "parameterReference": "dataset",
+                                      "required": true
+                                    }
+                                  },
+                                  "itemValuePath": "Path",
+                                  "itemTitlePath": "DisplayName",
+                                  "itemFullTitlePath": "Path",
+                                  "itemIsParent": "(IsFolder eq true)"
+                                },
+                                "browse": {
+                                  "operationId": "ListFolder",
+                                  "parameters": {
+                                    "dataset": {
+                                      "parameterReference": "dataset",
+                                      "required": true
+                                    },
+                                    "id": {
+                                      "selectedItemValuePath": "Id"
+                                    }
+                                  },
+                                  "itemValuePath": "Path",
+                                  "itemTitlePath": "DisplayName",
+                                  "itemFullTitlePath": "Path",
+                                  "itemIsParent": "(IsFolder eq true)"
+                                }
+                              },
+                              "description": "Must start with an existing library. Add folders if needed.",
+                              "x-ms-property-name-alias": "folderPath"
+                            },
+                            "name": {
+                              "type": "string",
+                              "title": "File Name",
+                              "description": "Name of the file.",
+                              "x-ms-property-name-alias": "name"
+                            },
+                            "body": {
+                              "type": "string",
+                              "title": "File Content",
+                              "format": "binary",
+                              "description": "Content of the file.",
+                              "x-ms-property-name-alias": "body"
+                            }
+                          },
+                          "required": [
+                            "body",
+                            "dataset",
+                            "folderPath",
+                            "name"
+                          ]
+                        },
+                        "operationType": "OpenApiConnection",
+                        "connectionName": "shared_sharepointonline",
+                        "parameters": {
+                          "dataset": "https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent",
+                          "folderPath": "/Shared Documents/General/5. Delivery/Horizon 2 PoC Red Flag Reviewer/Output files",
+                          "name": "Red Flag Reviewer@{triggerOutputs()?['body/text']}.html",
+                          "body": "@body('agent-a8548592-56ef-4911-8619-259d58dd0cb8')?['result']"
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "body": {
+                                "type": "object",
+                                "properties": {
+                                  "ItemId": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "The value that can be used to Get or Update file properties in libraries.",
+                                    "x-ms-property-name-alias": "body/ItemId"
+                                  },
+                                  "Id": {
+                                    "type": "string",
+                                    "description": "The unique id of the file or folder.",
+                                    "x-ms-property-name-alias": "body/Id"
+                                  },
+                                  "Name": {
+                                    "type": "string",
+                                    "description": "The name of the file or folder.",
+                                    "x-ms-property-name-alias": "body/Name"
+                                  },
+                                  "DisplayName": {
+                                    "type": "string",
+                                    "description": "The display name of the file or folder.",
+                                    "x-ms-property-name-alias": "body/DisplayName"
+                                  },
+                                  "Path": {
+                                    "type": "string",
+                                    "description": "The path of the file or folder.",
+                                    "x-ms-property-name-alias": "body/Path"
+                                  },
+                                  "LastModified": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "The date and time the file or folder was last modified.",
+                                    "x-ms-property-name-alias": "body/LastModified"
+                                  },
+                                  "Size": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "The size of the file or folder.",
+                                    "x-ms-property-name-alias": "body/Size"
+                                  },
+                                  "MediaType": {
+                                    "type": "string",
+                                    "description": "The media type of the file or folder.",
+                                    "x-ms-property-name-alias": "body/MediaType"
+                                  },
+                                  "IsFolder": {
+                                    "type": "boolean",
+                                    "description": "A boolean value (true, false) to indicate whether or not the blob is a folder.",
+                                    "x-ms-property-name-alias": "body/IsFolder"
+                                  },
+                                  "ETag": {
+                                    "type": "string",
+                                    "description": "The etag of the file or folder.",
+                                    "x-ms-property-name-alias": "body/ETag"
+                                  },
+                                  "FileLocator": {
+                                    "type": "string",
+                                    "description": "The filelocator of the file or folder.",
+                                    "x-ms-property-name-alias": "body/FileLocator"
+                                  }
+                                },
+                                "required": [],
+                                "description": "The SharePoint version of the BlobMetadataResponse extends the object by adding some additional fields that we want serialized",
+                                "x-ms-property-name-alias": "body"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e",
+                    "name": "Respond to the agent",
+                    "type": "builtinFunction",
+                    "version": 1,
+                    "position": {
+                      "x": 587,
+                      "y": 538
+                    },
+                    "data": {
+                      "config": {
+                        "operationId": "response",
+                        "operationName": "response",
+                        "displayName": "Respond to the agent",
+                        "category": "request",
+                        "categoryDisplayName": "Request",
+                        "iconUri": "",
+                        "brandColor": "",
+                        "parameters": {
+                          "schema": {
+                            "type": "object",
+                            "properties": {
+                              "text": {
+                                "title": "User Message",
+                                "type": "string",
+                                "x-ms-content-hint": "TEXT",
+                                "x-ms-dynamically-added": true
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          },
+                          "body": {
+                            "text": "Report received. The review has started and the completed report will be saved to the demo output folder."
+                          }
+                        },
+                        "description": "Respond to the calling agent with typed outputs.",
+                        "kind": "Skills"
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "description": "Function output"
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "connector-e664ad55-be54-4b1d-af4d-21690a87d2d5",
+                    "name": "Get file properties",
+                    "type": "connector",
+                    "version": 1,
+                    "position": {
+                      "x": 1921,
+                      "y": 539
+                    },
+                    "data": {
+                      "config": {
+                        "apiName": "shared_sharepointonline",
+                        "displayName": "SharePoint",
+                        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4913/sharepointonline/icon.png",
+                        "brandColor": "#036C70",
+                        "operationName": "GetFileItem",
+                        "operationType": "OpenApiConnection",
+                        "parametersSchema": {
+                          "type": "object",
+                          "properties": {
+                            "dataset": {
+                              "type": "string",
+                              "title": "Site Address",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetDataSets",
+                                "parameters": {},
+                                "itemsPath": "value",
+                                "itemValuePath": "Name",
+                                "itemTitlePath": "DisplayName"
+                              },
+                              "description": "Example: https://contoso.sharepoint.com/sites/sitename",
+                              "minLength": 1,
+                              "x-ms-property-name-alias": "dataset"
+                            },
+                            "table": {
+                              "type": "string",
+                              "title": "Library Name",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetTablesForLibraries",
+                                "parameters": {
+                                  "dataset": {
+                                    "parameterReference": "dataset",
+                                    "required": true
+                                  }
+                                },
+                                "itemsPath": "value",
+                                "itemValuePath": "Name",
+                                "itemTitlePath": "DisplayName"
+                              },
+                              "description": "SharePoint library name",
+                              "minLength": 1,
+                              "x-ms-property-name-alias": "table"
+                            },
+                            "id": {
+                              "type": "integer",
+                              "title": "Id",
+                              "format": "int64",
+                              "description": "Unique identifier of item to be retrieved",
+                              "x-ms-property-name-alias": "id"
+                            },
+                            "view": {
+                              "type": "string",
+                              "title": "Limit Columns by View",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetTableViews",
+                                "parameters": {
+                                  "dataset": {
+                                    "parameterReference": "dataset",
+                                    "required": true
+                                  },
+                                  "table": {
+                                    "parameterReference": "table",
+                                    "required": true
+                                  }
+                                },
+                                "itemValuePath": "Name",
+                                "itemTitlePath": "DisplayName"
+                              },
+                              "description": "Avoid column threshold issues by only using columns defined in a view",
+                              "x-ms-visibility": "advanced",
+                              "x-ms-property-name-alias": "view"
+                            }
+                          },
+                          "required": [
+                            "dataset",
+                            "id",
+                            "table"
+                          ]
+                        },
+                        "connectionName": "shared_sharepointonline",
+                        "parameters": {
+                          "dataset": "https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent",
+                          "table": "9ebc62e6-2028-4728-babe-6b10410c3cf9",
+                          "id": "@outputs('connector-7681d44e-24b3-42bb-b056-79cdeebed765')?['body/ItemId']"
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "ID": {
+                                "type": "integer",
+                                "title": "ID",
+                                "readOnly": true,
+                                "format": "int64",
+                                "description": "List item id. Use this value for specifying the item to act on in other list related actions.",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/ID"
+                              },
+                              "Title": {
+                                "type": "string",
+                                "title": "Title",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Title"
+                              },
+                              "DocumentType": {
+                                "type": "object",
+                                "title": "Document Type",
+                                "properties": {
+                                  "Value": {
+                                    "type": "string",
+                                    "title": "Value",
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "1b61a6e4-ee22-410d-a3e3-ba7bad6500e9"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Value",
+                                      "itemTitlePath": "Value"
+                                    },
+                                    "x-ms-property-name-alias": "body/DocumentType/Value"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": false,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/DocumentType"
+                              },
+                              "Modified": {
+                                "type": "string",
+                                "title": "Modified",
+                                "readOnly": true,
+                                "format": "date-time",
+                                "description": "When this item was last changed.",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Modified"
+                              },
+                              "Editor": {
+                                "type": "object",
+                                "title": "Modified By",
+                                "properties": {
+                                  "Claims": {
+                                    "type": "string",
+                                    "title": "Claims",
+                                    "readOnly": true,
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "d31655d1-1d5b-4511-95a1-7a09e9b75bf2"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Claims",
+                                      "itemTitlePath": "DisplayName"
+                                    },
+                                    "description": "Internal identifier for the user who last changed this item.",
+                                    "x-ms-property-name-alias": "body/Editor/Claims"
+                                  },
+                                  "DisplayName": {
+                                    "type": "string",
+                                    "title": "DisplayName",
+                                    "readOnly": true,
+                                    "description": "The name of the user who last changed this item.",
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/Editor/DisplayName"
+                                  },
+                                  "Email": {
+                                    "type": "string",
+                                    "title": "Email",
+                                    "readOnly": true,
+                                    "format": "email",
+                                    "description": "Email address of the user who last changed this item.",
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/Editor/Email"
+                                  },
+                                  "Picture": {
+                                    "type": "string",
+                                    "title": "Picture",
+                                    "readOnly": true,
+                                    "format": "uri",
+                                    "description": "Link to a picture of the user who last changed this item.",
+                                    "x-ms-property-name-alias": "body/Editor/Picture"
+                                  },
+                                  "Department": {
+                                    "type": "string",
+                                    "title": "Department",
+                                    "readOnly": true,
+                                    "description": "Department name of the user who last changed this item.",
+                                    "x-ms-property-name-alias": "body/Editor/Department"
+                                  },
+                                  "JobTitle": {
+                                    "type": "string",
+                                    "title": "JobTitle",
+                                    "readOnly": true,
+                                    "description": "Job title of the user who last changed this item.",
+                                    "x-ms-property-name-alias": "body/Editor/JobTitle"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": true,
+                                "description": "The user who last changed this item.",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Editor"
+                              },
+                              "OData__ColorTag": {
+                                "type": "string",
+                                "title": "Color Tag",
+                                "readOnly": true,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/OData__ColorTag"
+                              },
+                              "ComplianceAssetId": {
+                                "type": "string",
+                                "title": "Compliance Asset Id",
+                                "readOnly": true,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/ComplianceAssetId"
+                              },
+                              "OData__ExtendedDescription": {
+                                "type": "string",
+                                "title": "Description",
+                                "readOnly": false,
+                                "x-ms-property-name-alias": "body/OData__ExtendedDescription"
+                              },
+                              "Comments": {
+                                "type": "string",
+                                "title": "Comments",
+                                "readOnly": false,
+                                "x-ms-property-name-alias": "body/Comments"
+                              },
+                              "InternalOnly": {
+                                "type": "boolean",
+                                "title": "Internal Only",
+                                "readOnly": false,
+                                "default": false,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/InternalOnly"
+                              },
+                              "Function": {
+                                "type": "string",
+                                "title": "Function",
+                                "readOnly": false,
+                                "default": "Internal Operations",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Function"
+                              },
+                              "Activity": {
+                                "type": "string",
+                                "title": "Activity",
+                                "readOnly": false,
+                                "default": "Projects",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Activity"
+                              },
+                              "Subactivity": {
+                                "type": "string",
+                                "title": "Subactivity",
+                                "readOnly": false,
+                                "default": "NA",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Subactivity"
+                              },
+                              "Case": {
+                                "type": "string",
+                                "title": "Case",
+                                "readOnly": false,
+                                "default": "NA",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Case"
+                              },
+                              "Project": {
+                                "type": "string",
+                                "title": "Project",
+                                "readOnly": false,
+                                "default": "DIP - Automation and Intelligence",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Project"
+                              },
+                              "CategoryName": {
+                                "type": "string",
+                                "title": "Category",
+                                "readOnly": false,
+                                "default": "NA",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/CategoryName"
+                              },
+                              "CategoryValue": {
+                                "type": "string",
+                                "title": "Category Value",
+                                "readOnly": false,
+                                "default": "NA",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/CategoryValue"
+                              },
+                              "AggregationNarrative": {
+                                "type": "string",
+                                "title": "Aggregation Narrative",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/AggregationNarrative"
+                              },
+                              "AggregationStatus": {
+                                "type": "object",
+                                "title": "Aggregation Status",
+                                "properties": {
+                                  "Value": {
+                                    "type": "string",
+                                    "title": "Value",
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "f1d49d0c-a239-411c-8c33-b3d1e5a03c5d"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Value",
+                                      "itemTitlePath": "Value"
+                                    },
+                                    "x-ms-property-name-alias": "body/AggregationStatus/Value"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": false,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/AggregationStatus"
+                              },
+                              "PRADateDisposal": {
+                                "type": "string",
+                                "title": "PRA Date Disposal",
+                                "readOnly": false,
+                                "format": "date",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRADateDisposal"
+                              },
+                              "PRAText1": {
+                                "type": "string",
+                                "title": "PRA Text 1",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAText1"
+                              },
+                              "PRAText2": {
+                                "type": "string",
+                                "title": "PRA Text 2",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAText2"
+                              },
+                              "PRAText3": {
+                                "type": "string",
+                                "title": "PRA Text 3",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAText3"
+                              },
+                              "PRAText4": {
+                                "type": "string",
+                                "title": "PRA Text 4",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAText4"
+                              },
+                              "PRAText5": {
+                                "type": "string",
+                                "title": "PRA Text 5",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAText5"
+                              },
+                              "PRAType": {
+                                "type": "string",
+                                "title": "PRA Type",
+                                "readOnly": false,
+                                "default": "Doc",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/PRAType"
+                              },
+                              "HarmonieUIHidden": {
+                                "type": "string",
+                                "title": "HarmonieUIHidden",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/HarmonieUIHidden"
+                              },
+                              "To": {
+                                "type": "string",
+                                "title": "To",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/To"
+                              },
+                              "From": {
+                                "type": "string",
+                                "title": "From",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/From"
+                              },
+                              "Sent": {
+                                "type": "string",
+                                "title": "Sent",
+                                "readOnly": false,
+                                "format": "date-time",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Sent"
+                              },
+                              "Received": {
+                                "type": "string",
+                                "title": "Received",
+                                "readOnly": false,
+                                "format": "date-time",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Received"
+                              },
+                              "Subject": {
+                                "type": "string",
+                                "title": "Subject",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Subject"
+                              },
+                              "HasAttachments": {
+                                "type": "boolean",
+                                "title": "HasAttachments",
+                                "readOnly": false,
+                                "default": false,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/HasAttachments"
+                              },
+                              "Cc": {
+                                "type": "string",
+                                "title": "Cc",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Cc"
+                              },
+                              "Team": {
+                                "type": "string",
+                                "title": "Team",
+                                "readOnly": false,
+                                "default": "NA",
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Team"
+                              },
+                              "SilentOneID": {
+                                "type": "number",
+                                "title": "SilentOne ID",
+                                "readOnly": false,
+                                "format": "double",
+                                "maximum": 1.7976931348623157E+308,
+                                "minimum": -1.7976931348623157E+308,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/SilentOneID"
+                              },
+                              "SilentOneMD": {
+                                "type": "string",
+                                "title": "SilentOne Item Metadata",
+                                "readOnly": false,
+                                "x-ms-property-name-alias": "body/SilentOneMD"
+                              },
+                              "BoxNo": {
+                                "type": "string",
+                                "title": "Box No",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/BoxNo"
+                              },
+                              "Website": {
+                                "type": "object",
+                                "title": "Publish to Website",
+                                "properties": {
+                                  "TermGuid": {
+                                    "type": "string",
+                                    "title": "TermGuid",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/Website/TermGuid"
+                                  },
+                                  "Value": {
+                                    "type": "string",
+                                    "title": "Value",
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "9bfe3f6b-81c0-47d5-afec-aacfa2d59428"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Value",
+                                      "itemTitlePath": "Label"
+                                    },
+                                    "x-ms-property-name-alias": "body/Website/Value"
+                                  },
+                                  "WssId": {
+                                    "type": "integer",
+                                    "title": "WssId",
+                                    "readOnly": true,
+                                    "format": "int64",
+                                    "x-ms-property-name-alias": "body/Website/WssId"
+                                  },
+                                  "Label": {
+                                    "type": "string",
+                                    "title": "Label",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/Website/Label"
+                                  },
+                                  "Path": {
+                                    "type": "string",
+                                    "title": "Path",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/Website/Path"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": false,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Website"
+                              },
+                              "WebPublished": {
+                                "type": "string",
+                                "title": "WebPublished",
+                                "readOnly": false,
+                                "format": "date-time",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/WebPublished"
+                              },
+                              "WebPublishedVersion": {
+                                "type": "string",
+                                "title": "WebPublishedVersion",
+                                "readOnly": false,
+                                "maxLength": 255,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "startswith"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/WebPublishedVersion"
+                              },
+                              "MediaServiceImageTags": {
+                                "type": "array",
+                                "title": "Image Tags",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "TermGuid": {
+                                      "type": "string",
+                                      "title": "TermGuid",
+                                      "readOnly": true,
+                                      "x-ms-property-name-alias": "TermGuid"
+                                    },
+                                    "Value": {
+                                      "type": "string",
+                                      "title": "Value",
+                                      "x-ms-dynamic-list": {
+                                        "operationId": "GetEntityValues",
+                                        "parameters": {
+                                          "dataset": {
+                                            "parameterReference": "dataset",
+                                            "required": true
+                                          },
+                                          "table": {
+                                            "parameterReference": "table",
+                                            "required": true
+                                          },
+                                          "id": {
+                                            "value": "5cf76f15-5ced-4ddc-b409-7134ff3c332f"
+                                          }
+                                        },
+                                        "itemsPath": "value",
+                                        "itemValuePath": "Value",
+                                        "itemTitlePath": "Label"
+                                      },
+                                      "x-ms-property-name-alias": "Value"
+                                    },
+                                    "WssId": {
+                                      "type": "integer",
+                                      "title": "WssId",
+                                      "readOnly": true,
+                                      "format": "int64",
+                                      "x-ms-property-name-alias": "WssId"
+                                    },
+                                    "Label": {
+                                      "type": "string",
+                                      "title": "Label",
+                                      "readOnly": true,
+                                      "x-ms-property-name-alias": "Label"
+                                    },
+                                    "Path": {
+                                      "type": "string",
+                                      "title": "Path",
+                                      "readOnly": true,
+                                      "x-ms-property-name-alias": "Path"
+                                    }
+                                  },
+                                  "required": [],
+                                  "x-ms-capabilities": {
+                                    "filterFunctions": [
+                                      "eq"
+                                    ]
+                                  }
+                                },
+                                "readOnly": false,
+                                "description": "Field created by MediaTA",
+                                "x-ms-property-name-alias": "body/MediaServiceImageTags"
+                              },
+                              "MediaServiceOCR": {
+                                "type": "string",
+                                "title": "Extracted Text",
+                                "readOnly": true,
+                                "x-ms-property-name-alias": "body/MediaServiceOCR"
+                              },
+                              "Created": {
+                                "type": "string",
+                                "title": "Created",
+                                "readOnly": true,
+                                "format": "date-time",
+                                "description": "When this item was created.",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq",
+                                    "gt",
+                                    "ge",
+                                    "lt",
+                                    "le",
+                                    "ne"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Created"
+                              },
+                              "Author": {
+                                "type": "object",
+                                "title": "Created By",
+                                "properties": {
+                                  "Claims": {
+                                    "type": "string",
+                                    "title": "Claims",
+                                    "readOnly": true,
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "1df5e554-ec7e-46a6-901d-d85a3881cb18"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Claims",
+                                      "itemTitlePath": "DisplayName"
+                                    },
+                                    "description": "Internal identifier for the user who created this item.",
+                                    "x-ms-property-name-alias": "body/Author/Claims"
+                                  },
+                                  "DisplayName": {
+                                    "type": "string",
+                                    "title": "DisplayName",
+                                    "readOnly": true,
+                                    "description": "The name of the user who created this item.",
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/Author/DisplayName"
+                                  },
+                                  "Email": {
+                                    "type": "string",
+                                    "title": "Email",
+                                    "readOnly": true,
+                                    "format": "email",
+                                    "description": "Email address of the user who created this item.",
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/Author/Email"
+                                  },
+                                  "Picture": {
+                                    "type": "string",
+                                    "title": "Picture",
+                                    "readOnly": true,
+                                    "format": "uri",
+                                    "description": "Link to a picture of the user who created this item.",
+                                    "x-ms-property-name-alias": "body/Author/Picture"
+                                  },
+                                  "Department": {
+                                    "type": "string",
+                                    "title": "Department",
+                                    "readOnly": true,
+                                    "description": "Department name of the user who created this item.",
+                                    "x-ms-property-name-alias": "body/Author/Department"
+                                  },
+                                  "JobTitle": {
+                                    "type": "string",
+                                    "title": "JobTitle",
+                                    "readOnly": true,
+                                    "description": "Job title of the user who created this item.",
+                                    "x-ms-property-name-alias": "body/Author/JobTitle"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": true,
+                                "description": "The user who created this item.",
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/Author"
+                              },
+                              "CheckoutUser": {
+                                "type": "object",
+                                "title": "Checked Out To",
+                                "properties": {
+                                  "Claims": {
+                                    "type": "string",
+                                    "title": "Claims",
+                                    "readOnly": true,
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "3881510a-4e4a-4ee8-b102-8ee8e2d0dd4b"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Claims",
+                                      "itemTitlePath": "DisplayName"
+                                    },
+                                    "x-ms-property-name-alias": "body/CheckoutUser/Claims"
+                                  },
+                                  "DisplayName": {
+                                    "type": "string",
+                                    "title": "DisplayName",
+                                    "readOnly": true,
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/CheckoutUser/DisplayName"
+                                  },
+                                  "Email": {
+                                    "type": "string",
+                                    "title": "Email",
+                                    "readOnly": true,
+                                    "format": "email",
+                                    "x-ms-capabilities": {
+                                      "filterFunctions": [
+                                        "eq",
+                                        "startswith"
+                                      ]
+                                    },
+                                    "x-ms-property-name-alias": "body/CheckoutUser/Email"
+                                  },
+                                  "Picture": {
+                                    "type": "string",
+                                    "title": "Picture",
+                                    "readOnly": true,
+                                    "format": "uri",
+                                    "x-ms-property-name-alias": "body/CheckoutUser/Picture"
+                                  },
+                                  "Department": {
+                                    "type": "string",
+                                    "title": "Department",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/CheckoutUser/Department"
+                                  },
+                                  "JobTitle": {
+                                    "type": "string",
+                                    "title": "JobTitle",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/CheckoutUser/JobTitle"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": true,
+                                "x-ms-capabilities": {
+                                  "filterFunctions": [
+                                    "eq"
+                                  ]
+                                },
+                                "x-ms-property-name-alias": "body/CheckoutUser"
+                              },
+                              "OData__DisplayName": {
+                                "type": "string",
+                                "title": "Sensitivity",
+                                "readOnly": true,
+                                "x-ms-property-name-alias": "body/OData__DisplayName"
+                              },
+                              "{Identifier}": {
+                                "type": "string",
+                                "title": "Identifier",
+                                "readOnly": true,
+                                "description": "Value that can be used in file related actions for selecting a file.",
+                                "x-ms-property-name-alias": "body/{Identifier}"
+                              },
+                              "{IsFolder}": {
+                                "type": "boolean",
+                                "title": "Is folder",
+                                "readOnly": true,
+                                "description": "True when the item is a folder, false otherwise.",
+                                "x-ms-property-name-alias": "body/{IsFolder}"
+                              },
+                              "{Thumbnail}": {
+                                "type": "object",
+                                "title": "Thumbnail",
+                                "properties": {
+                                  "Small": {
+                                    "type": "string",
+                                    "title": "Small",
+                                    "readOnly": true,
+                                    "description": "URL to the small, highly compressed size thumbnail of the item, if available.",
+                                    "x-ms-property-name-alias": "body/{Thumbnail}/Small"
+                                  },
+                                  "Medium": {
+                                    "type": "string",
+                                    "title": "Medium",
+                                    "readOnly": true,
+                                    "description": "URL to the standard size thumbnail of the item, if available.",
+                                    "x-ms-property-name-alias": "body/{Thumbnail}/Medium"
+                                  },
+                                  "Large": {
+                                    "type": "string",
+                                    "title": "Large",
+                                    "readOnly": true,
+                                    "description": "URL to the largest size thumbnail of the item, if available.",
+                                    "x-ms-property-name-alias": "body/{Thumbnail}/Large"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": true,
+                                "description": "URL to the thumbnails of the item in 3 different sizes, if available.",
+                                "x-ms-property-name-alias": "body/{Thumbnail}"
+                              },
+                              "{Link}": {
+                                "type": "string",
+                                "title": "Link to item",
+                                "readOnly": true,
+                                "description": "Link that can be used to get to the file or list item. Only people with permissions to the item will be able to open the link.",
+                                "x-ms-property-name-alias": "body/{Link}"
+                              },
+                              "{Name}": {
+                                "type": "string",
+                                "title": "Name",
+                                "readOnly": true,
+                                "description": "File name of the item in document libraries, display name of the item in lists.",
+                                "x-ms-property-name-alias": "body/{Name}"
+                              },
+                              "{FilenameWithExtension}": {
+                                "type": "string",
+                                "title": "File name with extension",
+                                "readOnly": true,
+                                "description": "For libraries, returns file name including extension. For lists, returns the title property.",
+                                "x-ms-property-name-alias": "body/{FilenameWithExtension}"
+                              },
+                              "{Path}": {
+                                "type": "string",
+                                "title": "Folder path",
+                                "readOnly": true,
+                                "description": "Path to the folder the item is in, relative to the site address.",
+                                "x-ms-property-name-alias": "body/{Path}"
+                              },
+                              "{FullPath}": {
+                                "type": "string",
+                                "title": "Full Path",
+                                "readOnly": true,
+                                "description": "Full path of an item or a folder or a file",
+                                "x-ms-property-name-alias": "body/{FullPath}"
+                              },
+                              "{ModerationStatus}": {
+                                "type": "string",
+                                "title": "Content approval status",
+                                "readOnly": true,
+                                "description": "The content approval status. It can be one of the following: Draft, Pending, Approved, or Rejected",
+                                "x-ms-property-name-alias": "body/{ModerationStatus}"
+                              },
+                              "{ModerationComment}": {
+                                "type": "string",
+                                "title": "Comments associated with the content approval of this list item",
+                                "readOnly": true,
+                                "description": "The comments associated with moderation of the list item.",
+                                "x-ms-property-name-alias": "body/{ModerationComment}"
+                              },
+                              "{ContentType}": {
+                                "type": "object",
+                                "title": "Content type",
+                                "properties": {
+                                  "Id": {
+                                    "type": "string",
+                                    "title": "Id",
+                                    "x-ms-dynamic-list": {
+                                      "operationId": "GetEntityValues",
+                                      "parameters": {
+                                        "dataset": {
+                                          "parameterReference": "dataset",
+                                          "required": true
+                                        },
+                                        "table": {
+                                          "parameterReference": "table",
+                                          "required": true
+                                        },
+                                        "id": {
+                                          "value": "4651e8f2-38c9-4ad0-8def-41f743f76f30"
+                                        }
+                                      },
+                                      "itemsPath": "value",
+                                      "itemValuePath": "Id",
+                                      "itemTitlePath": "Name"
+                                    },
+                                    "x-ms-property-name-alias": "body/{ContentType}/Id"
+                                  },
+                                  "Name": {
+                                    "type": "string",
+                                    "title": "Name",
+                                    "readOnly": true,
+                                    "x-ms-property-name-alias": "body/{ContentType}/Name"
+                                  }
+                                },
+                                "required": [],
+                                "readOnly": false,
+                                "description": "Name of the Content type of the item.",
+                                "x-ms-property-name-alias": "body/{ContentType}"
+                              },
+                              "{IsCheckedOut}": {
+                                "type": "boolean",
+                                "title": "Checked out",
+                                "readOnly": true,
+                                "description": "True when the file is checked out, false otherwise.",
+                                "x-ms-property-name-alias": "body/{IsCheckedOut}"
+                              },
+                              "{DriveId}": {
+                                "type": "string",
+                                "title": "Drive ID",
+                                "readOnly": true,
+                                "description": "Unique identifier for the document library in MS Graph",
+                                "x-ms-property-name-alias": "body/{DriveId}"
+                              },
+                              "{DriveItemId}": {
+                                "type": "string",
+                                "title": "Drive item ID",
+                                "readOnly": true,
+                                "description": "Unique identifier for the file in MS Graph.",
+                                "x-ms-property-name-alias": "body/{DriveItemId}"
+                              },
+                              "{SensitivityLabelId}": {
+                                "type": "string",
+                                "title": "Sensitivity Label Id",
+                                "readOnly": true,
+                                "description": "Identifier of the file sensitivity label.",
+                                "x-ms-property-name-alias": "body/{SensitivityLabelId}"
+                              },
+                              "{SensitivityLabelName}": {
+                                "type": "string",
+                                "title": "Sensitivity Label Display Name",
+                                "readOnly": true,
+                                "description": "Display name of the file sensitivity label.",
+                                "x-ms-property-name-alias": "body/{SensitivityLabelName}"
+                              },
+                              "{VersionNumber}": {
+                                "type": "string",
+                                "title": "Version number",
+                                "readOnly": true,
+                                "description": "The version number of the file or the list item.",
+                                "x-ms-property-name-alias": "body/{VersionNumber}"
+                              },
+                              "{TriggerWindowStartToken}": {
+                                "type": "string",
+                                "title": "Trigger Window Start Token",
+                                "readOnly": true,
+                                "description": "A token expressing the time of the last flow check. Use this if you want to check if one or more columns were modified since the last flow check.",
+                                "x-ms-property-name-alias": "body/{TriggerWindowStartToken}"
+                              },
+                              "{TriggerWindowEndToken}": {
+                                "type": "string",
+                                "title": "Trigger Window End Token",
+                                "readOnly": true,
+                                "description": "A token expressing the time of the current flow check. Use this if you want to check if one or more columns were modified since the last flow check.",
+                                "x-ms-property-name-alias": "body/{TriggerWindowEndToken}"
+                              }
+                            },
+                            "required": []
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "connector-6ffd817b-71e4-4deb-a3da-d00b2c7e37be",
+                    "name": "Post card in a chat or channel",
+                    "type": "connector",
+                    "version": 1,
+                    "position": {
+                      "x": 2587,
+                      "y": 539
+                    },
+                    "data": {
+                      "config": {
+                        "apiName": "shared_teams",
+                        "displayName": "Microsoft Teams",
+                        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1812/1.0.1812.4744/teams/icon.png",
+                        "brandColor": "#5558AF",
+                        "operationName": "PostCardToConversation",
+                        "parameters": {
+                          "poster": "Flow bot",
+                          "location": "Chat with Flow bot",
+                          "body/recipient": "@triggerOutputs()?['body/email']",
+                          "body/messageBody": "{\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"type\": \"AdaptiveCard\",\n  \"version\": \"1.5\",\n  \"body\": [\n    {\n      \"type\": \"TextBlock\",\n      \"text\": \"Your GM report review is complete.\",\n      \"weight\": \"Bolder\",\n      \"size\": \"Medium\",\n      \"wrap\": true\n    },\n    {\n      \"type\": \"TextBlock\",\n      \"text\": \"The reviewed report has been created in SharePoint.\",\n      \"wrap\": true\n    }\n  ],\n  \"actions\": [\n    {\n      \"type\": \"Action.OpenUrl\",\n      \"title\": \"Open reviewed report\",\n      \"url\": \"@{outputs('builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665')}\"\n    }\n  ]\n}",
+                          "body/isAlert": false
+                        },
+                        "parametersSchema": {
+                          "type": "object",
+                          "properties": {
+                            "poster": {
+                              "type": "string",
+                              "title": "Post as",
+                              "description": "Select an option",
+                              "default": "Flow bot",
+                              "enum": [
+                                "Power Apps",
+                                "Power Virtual Agents",
+                                "Flow bot",
+                                "User"
+                              ],
+                              "minLength": 1,
+                              "x-ms-enum-values": [
+                                {
+                                  "displayName": "User",
+                                  "value": "User"
+                                },
+                                {
+                                  "displayName": "Flow bot",
+                                  "value": "Flow bot"
+                                },
+                                {
+                                  "displayName": "Microsoft Copilot Studio agent",
+                                  "value": "Power Virtual Agents"
+                                },
+                                {
+                                  "displayName": "Power Apps",
+                                  "value": "Power Apps"
+                                }
+                              ],
+                              "x-ms-property-name-alias": "poster"
+                            },
+                            "location": {
+                              "type": "string",
+                              "title": "Post in",
+                              "x-ms-dynamic-list": {
+                                "operationId": "GetMessageLocations",
+                                "parameters": {
+                                  "messageType": {
+                                    "value": "ParentMessage"
+                                  },
+                                  "poster": {
+                                    "parameterReference": "poster",
+                                    "required": true
+                                  }
+                                },
+                                "itemsPath": "value",
+                                "itemValuePath": "id",
+                                "itemTitlePath": "displayName"
+                              },
+                              "description": "Select an option",
+                              "minLength": 1,
+                              "x-ms-property-name-alias": "location"
+                            },
+                            "body": {
+                              "type": "object",
+                              "title": "Post card request",
+                              "x-ms-dynamic-properties": {
+                                "operationId": "GetUnifiedActionSchema",
+                                "parameters": {
+                                  "actionType": {
+                                    "value": "UnifiedAdaptiveCard"
+                                  },
+                                  "poster": {
+                                    "parameterReference": "poster",
+                                    "required": true
+                                  },
+                                  "recipientType": {
+                                    "parameterReference": "location",
+                                    "required": true
+                                  }
+                                },
+                                "itemValuePath": "schema"
+                              },
+                              "description": "The post card request",
+                              "x-ms-property-name-alias": "body"
+                            }
+                          },
+                          "required": [
+                            "body",
+                            "location",
+                            "poster"
+                          ]
+                        },
+                        "operationType": "OpenApiConnection",
+                        "connectionName": "shared_teams-1",
+                        "resolvedDynamicSchemas": {
+                          "body": {
+                            "type": "object",
+                            "properties": {
+                              "recipient": {
+                                "type": "string",
+                                "title": "Recipient",
+                                "x-ms-dynamic-list": {
+                                  "builtInOperation": "AadGraph.GetUsers",
+                                  "parameters": {},
+                                  "itemValuePath": "mail",
+                                  "itemTitlePath": "displayName"
+                                },
+                                "description": "Enter a name or email address",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "recipient"
+                              },
+                              "messageBody": {
+                                "type": "string",
+                                "title": "Adaptive Card",
+                                "description": "Insert adaptive card json here",
+                                "x-ms-property-name-alias": "messageBody"
+                              },
+                              "cardTypeId": {
+                                "type": "string",
+                                "title": "Card Type ID",
+                                "description": "Should match with corresponding When someone responds to an adaptive card trigger",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "cardTypeId"
+                              },
+                              "isAlert": {
+                                "type": "boolean",
+                                "title": "IsAlert",
+                                "description": "If the message will be shown in the activity feed",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "isAlert"
+                              }
+                            },
+                            "required": [
+                              "messageBody",
+                              "recipient"
+                            ]
+                          }
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "properties": {
+                              "body": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "title": "Message ID",
+                                    "description": "Unique message ID",
+                                    "x-ms-property-name-alias": "body/id"
+                                  },
+                                  "messageLink": {
+                                    "type": "string",
+                                    "title": "Message link",
+                                    "description": "Link to the message in Microsoft Teams",
+                                    "x-ms-property-name-alias": "body/messageLink"
+                                  },
+                                  "conversationId": {
+                                    "type": "string",
+                                    "title": "Conversation ID",
+                                    "description": "The chat's unique identifier",
+                                    "x-ms-property-name-alias": "body/conversationId"
+                                  }
+                                },
+                                "required": [],
+                                "x-ms-property-name-alias": "body"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 265,
+                      "height": 66
+                    }
+                  },
+                  {
+                    "id": "builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665",
+                    "name": "Compose",
+                    "type": "builtinFunction",
+                    "version": 1,
+                    "position": {
+                      "x": 2237,
+                      "y": 539
+                    },
+                    "data": {
+                      "config": {
+                        "operationId": "composeNew",
+                        "operationName": "composeNew",
+                        "displayName": "Compose",
+                        "category": "providers/Microsoft.ProcessSimple/operationGroups/DataOperation",
+                        "categoryDisplayName": "Data Operations",
+                        "iconUri": "https://logicappsv2resources.blob.core.windows.net/icons/compose.svg",
+                        "brandColor": "#8c6cff",
+                        "parameters": {
+                          "inputs": "@outputs('connector-e664ad55-be54-4b1d-af4d-21690a87d2d5')?['body/{Link}']"
+                        },
+                        "description": "Compose outputs from multiple actions into a single output.",
+                        "parametersSchema": {
+                          "type": "object",
+                          "required": [
+                            "inputs"
+                          ],
+                          "properties": {
+                            "inputs": {
+                              "type": "string",
+                              "title": "Inputs",
+                              "description": "Value to compose"
+                            }
+                          }
+                        }
+                      },
+                      "outcomes": [
+                        {
+                          "id": "default",
+                          "label": "Default",
+                          "outcomeSchema": {
+                            "type": "object",
+                            "description": "Function output"
+                          }
+                        }
+                      ]
+                    },
+                    "measured": {
+                      "width": 240,
+                      "height": 66
+                    }
+                  }
+                ],
+                "edges": [
+                  {
+                    "id": "edge-agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d-agent-a8548592-56ef-4911-8619-259d58dd0cb8",
+                    "source": "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d",
+                    "target": "agent-a8548592-56ef-4911-8619-259d58dd0cb8"
+                  },
+                  {
+                    "id": "edge-agent-a8548592-56ef-4911-8619-259d58dd0cb8-connector-7681d44e-24b3-42bb-b056-79cdeebed765",
+                    "source": "agent-a8548592-56ef-4911-8619-259d58dd0cb8",
+                    "target": "connector-7681d44e-24b3-42bb-b056-79cdeebed765"
+                  },
+                  {
+                    "id": "edge-start-0224094d-e7be-4ae9-a1fd-3dcc1a6fd177-builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e",
+                    "source": "start-0224094d-e7be-4ae9-a1fd-3dcc1a6fd177",
+                    "target": "builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e"
+                  },
+                  {
+                    "id": "edge-builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e-agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d",
+                    "source": "builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e",
+                    "target": "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d"
+                  },
+                  {
+                    "id": "edge-connector-7681d44e-24b3-42bb-b056-79cdeebed765-connector-e664ad55-be54-4b1d-af4d-21690a87d2d5",
+                    "source": "connector-7681d44e-24b3-42bb-b056-79cdeebed765",
+                    "target": "connector-e664ad55-be54-4b1d-af4d-21690a87d2d5"
+                  },
+                  {
+                    "id": "edge-connector-e664ad55-be54-4b1d-af4d-21690a87d2d5-builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665",
+                    "source": "connector-e664ad55-be54-4b1d-af4d-21690a87d2d5",
+                    "target": "builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665"
+                  },
+                  {
+                    "id": "edge-builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665-connector-6ffd817b-71e4-4deb-a3da-d00b2c7e37be",
+                    "source": "builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665",
+                    "target": "connector-6ffd817b-71e4-4deb-a3da-d00b2c7e37be"
+                  }
+                ],
+                "connectionReferences": {
+                  "shared_agentnode": {
+                    "api": {
+                      "name": "shared_agentnode"
+                    },
+                    "connection": {
+                      "connectionReferenceLogicalName": "new_sharedagentnode_8854993f"
+                    },
+                    "runtimeSource": "invoker",
+                    "connectionName": "shared-agentnode-caf6a4b4-44f5-40a4-8185-8f10d6a3979a"
+                  },
+                  "shared_sharepointonline": {
+                    "api": {
+                      "name": "shared_sharepointonline"
+                    },
+                    "connection": {
+                      "connectionReferenceLogicalName": "new_sharedsharepointonline_c616b324"
+                    },
+                    "runtimeSource": "invoker",
+                    "connectionName": "shared-sharepointonl-efac91d5-f076-495d-8d5b-3584ab82c8cf"
+                  },
+                  "shared_teams-1": {
+                    "api": {
+                      "name": "shared_teams"
+                    },
+                    "connection": {
+                      "connectionReferenceLogicalName": "new_sharedteams_932092c1"
+                    },
+                    "runtimeSource": "invoker",
+                    "connectionName": "shared-teams-ee01dbbb-f104-4792-82ea-690404c1df56"
+                  }
+                }
+              },
+              "nodeActionMapping": {
+                "builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e": [
+                  "Respond_to_the_agent"
+                ],
+                "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d": [
+                  "GM_Report_Reviewer_V3"
+                ],
+                "agent-a8548592-56ef-4911-8619-259d58dd0cb8": [
+                  "GM_Report_Formatter"
+                ],
+                "connector-7681d44e-24b3-42bb-b056-79cdeebed765": [
+                  "Create_file_in_SharePoint"
+                ],
+                "connector-e664ad55-be54-4b1d-af4d-21690a87d2d5": [
+                  "Get_file_properties"
+                ],
+                "builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665": [
+                  "Compose"
+                ],
+                "connector-6ffd817b-71e4-4deb-a3da-d00b2c7e37be": [
+                  "Post_card_in_a_chat_or_channel"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "User Message",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text"
+              ]
+            },
+            "statusCode": 200,
+            "body": {
+              "text": "Report received. The review has started and the completed report will be saved to the demo output folder."
+            }
+          },
+          "metadata": {
+            "description": "Respond to the agent",
+            "nodeId": "builtinFunction-aaef2d69-d684-40a1-9f1c-196e4f4f602e"
+          }
+        },
+        "GM_Report_Reviewer_V3": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "body/prompt": "Review the attached Group Manager report against all requirements in Requirements0.2.xlsx.\n@{triggerOutputs()?['body/file']}\nProduce a complete Group Manager Report ",
+              "body/agentId": "cr9cf_gmgmn_XwJvvl"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+              "connectionName": "shared_agentnode",
+              "operationId": "InvokeAgent"
+            }
+          },
+          "runAfter": {
+            "Respond_to_the_agent": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "GM Report Reviewer V3",
+            "nodeId": "agent-1fa89566-8d7d-4697-a7b9-32d3d671a12d"
+          }
+        },
+        "GM_Report_Formatter": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "body/prompt": "Apply the GM Report Formatting Standard to the following report and return the fully formatted result.@{body('GM_Report_Reviewer_V3')?['result']}\n\n",
+              "body/agentId": "cr9cf_gmreportformatter_05gZJr"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+              "connectionName": "shared_agentnode",
+              "operationId": "InvokeAgent"
+            }
+          },
+          "runAfter": {
+            "GM_Report_Reviewer_V3": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "GM Report Formatter",
+            "nodeId": "agent-a8548592-56ef-4911-8619-259d58dd0cb8"
+          }
+        },
+        "Create_file_in_SharePoint": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent",
+              "folderPath": "/Shared Documents/General/5. Delivery/Horizon 2 PoC Red Flag Reviewer/Output files",
+              "name": "Red Flag Reviewer@{triggerOutputs()?['body/text']}.html",
+              "body": "@body('GM_Report_Formatter')?['result']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "connectionName": "shared_sharepointonline",
+              "operationId": "CreateFile"
+            }
+          },
+          "runAfter": {
+            "GM_Report_Formatter": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "Create file in SharePoint",
+            "nodeId": "connector-7681d44e-24b3-42bb-b056-79cdeebed765"
+          }
+        },
+        "Get_file_properties": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent",
+              "table": "9ebc62e6-2028-4728-babe-6b10410c3cf9",
+              "id": "@outputs('Create_file_in_SharePoint')?['body/ItemId']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "connectionName": "shared_sharepointonline",
+              "operationId": "GetFileItem"
+            }
+          },
+          "runAfter": {
+            "Create_file_in_SharePoint": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "Get file properties",
+            "nodeId": "connector-e664ad55-be54-4b1d-af4d-21690a87d2d5"
+          }
+        },
+        "Compose": {
+          "type": "Compose",
+          "inputs": "@outputs('Get_file_properties')?['body/{Link}']",
+          "runAfter": {
+            "Get_file_properties": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "Compose",
+            "nodeId": "builtinFunction-6d8e5f38-d7f1-4721-8178-81b46aab0665"
+          }
+        },
+        "Post_card_in_a_chat_or_channel": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "poster": "Flow bot",
+              "location": "Chat with Flow bot",
+              "body/recipient": "@triggerOutputs()?['body/email']",
+              "body/messageBody": "{\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"type\": \"AdaptiveCard\",\n  \"version\": \"1.5\",\n  \"body\": [\n    {\n      \"type\": \"TextBlock\",\n      \"text\": \"Your GM report review is complete.\",\n      \"weight\": \"Bolder\",\n      \"size\": \"Medium\",\n      \"wrap\": true\n    },\n    {\n      \"type\": \"TextBlock\",\n      \"text\": \"The reviewed report has been created in SharePoint.\",\n      \"wrap\": true\n    }\n  ],\n  \"actions\": [\n    {\n      \"type\": \"Action.OpenUrl\",\n      \"title\": \"Open reviewed report\",\n      \"url\": \"@{outputs('Compose')}\"\n    }\n  ]\n}",
+              "body/isAlert": false
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+              "connectionName": "shared_teams-1",
+              "operationId": "PostCardToConversation"
+            }
+          },
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "description": "Post card in a chat or channel",
+            "nodeId": "connector-6ffd817b-71e4-4deb-a3da-d00b2c7e37be"
+          }
+        }
+      },
+      "outputs": {},
+      "metadata": {
+        "telemetryMetadata": {
+          "creationSource": "WorkflowDesigner",
+          "modifiedSources": "WorkflowDesigner"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

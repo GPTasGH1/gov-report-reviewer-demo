@@ -1,0 +1,23 @@
+kind: WorkflowTool
+workflowId: 64e89b55-58ee-35c6-5085-2e3f1b1feca1
+toolInputs:
+  - name: text
+    displayName: Report Title
+    description: Please enter your input
+
+  - name: file
+    displayName: Report File
+    description: Please select a file or image
+
+  - name: email
+    displayName: Email
+    description: Use the user's email address that you have asked for. Do not infer an email address or use one from the report.
+
+toolOutputs:
+  - name: text
+    displayName: User Message
+
+connectionProperties:
+  $kind: ConnectionProperties
+  diagnostics:
+  mode: Invoker

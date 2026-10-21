@@ -1,0 +1,10 @@
+<botcomponent schemaname="cr9cf_govreportreviewerdemo_L8SxGx.tool.GMReportReviewWorkflowV2-Demo_2B4">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>GM Report Review Workflow V2 - Demo</name>
+  <parentbotid>
+    <schemaname>cr9cf_govreportreviewerdemo_L8SxGx</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
