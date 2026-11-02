@@ -1,0 +1,10 @@
+<botcomponent schemaname="cr9cf_draft_qgy8IO.tool.WorkIQMCPServer_IR2">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Work IQ MCP Server</name>
+  <parentbotid>
+    <schemaname>cr9cf_gmreportreviewerv5_JNy10T</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

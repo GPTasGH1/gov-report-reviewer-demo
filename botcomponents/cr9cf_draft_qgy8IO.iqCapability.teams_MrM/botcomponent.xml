@@ -1,0 +1,10 @@
+<botcomponent schemaname="cr9cf_draft_qgy8IO.iqCapability.teams_MrM">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>teams</name>
+  <parentbotid>
+    <schemaname>cr9cf_gmreportreviewerv5_JNy10T</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

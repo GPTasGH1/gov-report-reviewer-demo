@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26092.168" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26092.00168">
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.166" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00166">
   <Entities />
   <Roles />
   <Workflows />
@@ -12,26 +12,10 @@
   <CustomControls />
   <EntityDataProviders />
   <connectionreferences>
-    <connectionreference connectionreferencelogicalname="new_sharedagentnode_8854993f">
-      <connectionreferencedisplayname>Agent</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_agentnode</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="new_sharedsharepointonline_c616b324">
-      <connectionreferencedisplayname>SharePoint</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sharepointonline</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="new_sharedteams_932092c1">
-      <connectionreferencedisplayname>Microsoft Teams</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_teams</connectorid>
-      <iscustomizable>1</iscustomizable>
+    <connectionreference connectionreferencelogicalname="cr9cf_draft_qgy8IO.cr.shared_workiqmcp.shared-workiqmcp-59594841-18ad-4bad-8106-4d7ae3fd969c">
+      <connectionreferencedisplayname>cr9cf_draft_qgy8IO.cr.shared_workiqmcp.shared-workiqmcp-59594841-18ad-4bad-8106-4d7ae3fd969c</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_workiqmcp</connectorid>
+      <iscustomizable>0</iscustomizable>
       <promptingbehavior>0</promptingbehavior>
       <statecode>0</statecode>
       <statuscode>1</statuscode>

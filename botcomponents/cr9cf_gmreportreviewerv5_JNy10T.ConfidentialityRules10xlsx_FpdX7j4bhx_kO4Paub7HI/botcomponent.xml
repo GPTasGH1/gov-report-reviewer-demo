@@ -1,0 +1,11 @@
+<botcomponent schemaname="cr9cf_gmreportreviewerv5_JNy10T.ConfidentialityRules10xlsx_FpdX7j4bhx_kO4Paub7HI">
+  <componenttype>16</componenttype>
+  <description>This knowledge source provides information found in Confidentiality Rules 1.0.xlsx SharePoint.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Confidentiality Rules 1.0.xlsx</name>
+  <parentbotid>
+    <schemaname>cr9cf_gmreportreviewerv5_JNy10T</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

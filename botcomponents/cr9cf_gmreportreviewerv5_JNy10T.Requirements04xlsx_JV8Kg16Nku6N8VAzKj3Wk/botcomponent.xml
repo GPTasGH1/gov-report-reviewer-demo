@@ -1,0 +1,11 @@
+<botcomponent schemaname="cr9cf_gmreportreviewerv5_JNy10T.Requirements04xlsx_JV8Kg16Nku6N8VAzKj3Wk">
+  <componenttype>16</componenttype>
+  <description>This knowledge source provides information found in Requirements0.4.xlsx SharePoint.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Requirements0.4.xlsx</name>
+  <parentbotid>
+    <schemaname>cr9cf_gmreportreviewerv5_JNy10T</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

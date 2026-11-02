@@ -1,0 +1,5 @@
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointKnowledgeSource
+  siteUrl: https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent/Shared%20Documents/General/5.%20Delivery/Horizon%202%20PoC%20Red%20Flag%20Reviewer/Requirements0.4.xlsx
+  targetKind: File

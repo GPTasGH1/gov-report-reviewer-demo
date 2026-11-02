@@ -1,0 +1,5 @@
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointKnowledgeSource
+  siteUrl: https://tasmandc.sharepoint.com/sites/proj-464DIP-Intelligent/Shared%20Documents/General/5.%20Delivery/Horizon%202%20PoC%20Red%20Flag%20Reviewer/Knowledge%20Files/Confidentiality%20Rules%201.0.xlsx
+  targetKind: File

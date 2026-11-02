@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26092.168" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26092.168" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26092.00168">
+<ImportExportXml version="9.2.26094.166" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.166" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00166">
   <SolutionManifest>
-    <UniqueName>GovReportReviewerDemo</UniqueName>
+    <UniqueName>v5GovReportReviewer</UniqueName>
     <LocalizedNames>
-      <LocalizedName description="Gov Report Reviewer Demo" languagecode="1033" />
+      <LocalizedName description="v5 Gov Report Reviewer" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.1</Version>
+    <Version>5.0.0.1</Version>
     <Managed>0</Managed>
     <Publisher>
       <UniqueName>DefaultPublisherorg99547851</UniqueName>
@@ -79,9 +79,7 @@
         </Address>
       </Addresses>
     </Publisher>
-    <RootComponents>
-      <RootComponent type="29" id="{64e89b55-58ee-35c6-5085-2e3f1b1feca1}" behavior="0" />
-    </RootComponents>
+    <RootComponents />
     <MissingDependencies />
   </SolutionManifest>
 </ImportExportXml>

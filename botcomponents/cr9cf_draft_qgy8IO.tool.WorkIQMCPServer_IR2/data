@@ -1,0 +1,5 @@
+kind: McpTool
+authMode: Invoker
+connectionReference: cr9cf_draft_qgy8IO.cr.shared_workiqmcp.shared-workiqmcp-59594841-18ad-4bad-8106-4d7ae3fd969c
+connectorId: /providers/Microsoft.PowerApps/apis/shared_workiqmcp
+operationId: InvokeWorkIQMCP
